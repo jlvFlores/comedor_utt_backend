@@ -150,7 +150,6 @@ module.exports = {
                 });
                 const data = {
                     id: myUser.id,
-                    email: myUser.email,
                     user_code: myUser.user_code,
                     name: myUser.name,
                     password: myUser.password,

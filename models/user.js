@@ -19,7 +19,6 @@ User.findById = (id, callback) => {
     const sql = `
     SELECT
         id,
-        email, 
         user_code,
         name,
         password,
@@ -38,7 +37,6 @@ User.findByUserId = (id) => {
     const sql = `
     SELECT 
         U.id,
-        U.email, 
         U.user_code,
         U.name,
         U.password,
@@ -75,7 +73,6 @@ User.findByUserCode = (user_code) => {
     const sql = `
     SELECT 
         U.id,
-        U.email, 
         U.user_code,
         U.name,
         U.password,
@@ -148,7 +145,6 @@ User.create = (user) => {
     const sql = `
     INSERT INTO
         users(
-            email,
             user_code,
             name,
             password,
@@ -159,7 +155,6 @@ User.create = (user) => {
     `;
 
     return db.oneOrNone(sql, [
-        user.email,
         user.user_code,
         user.name,
         user.password,
@@ -174,7 +169,6 @@ User.update = (user) => {
         users
     SET
         name = $2,
-        email = $3,
         updated_at = $4
     WHERE
         id = $1
@@ -183,7 +177,6 @@ User.update = (user) => {
     return db.none(sql, [
         user.id,
         user.name,
-        user.email,
         new Date()
     ]);
 }
