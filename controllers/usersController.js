@@ -2,7 +2,6 @@ const User = require('../models/user');
 const Rol = require('../models/rol');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
-const storage = require('../utils/cloud_storage');
 
 module.exports = {
 

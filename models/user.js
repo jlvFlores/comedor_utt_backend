@@ -151,7 +151,7 @@ User.create = (user) => {
             created_at,
             updated_at
         )
-    VALUES($1, $2, $3, $4, $5, $6) RETURNING id
+    VALUES($1, $2, $3, $4, $5) RETURNING id
     `;
 
     return db.oneOrNone(sql, [
@@ -164,11 +164,16 @@ User.create = (user) => {
 }
 
 User.update = (user) => {
+
+    const myPasswordHashed = crypto.createHash('md5').update(user.password).digest('hex');
+    user.password = myPasswordHashed;
+    
     const sql = `
     UPDATE
         users
     SET
         name = $2,
+        password = $3,
         updated_at = $4
     WHERE
         id = $1
@@ -177,6 +182,7 @@ User.update = (user) => {
     return db.none(sql, [
         user.id,
         user.name,
+        user.password,
         new Date()
     ]);
 }

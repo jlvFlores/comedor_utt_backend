@@ -2,6 +2,44 @@ const db = require('../config/config');
 
 const Product = {};
 
+Product.getAll = () => {
+    const sql = `
+    SELECT 
+        *
+    FROM
+        products
+    `;
+
+    return db.manyOrNone(sql);
+}
+
+Product.delete = (id) => {
+    const sql = `
+    DELETE FROM 
+        products
+    WHERE 
+        id = $1
+    `;
+    return db.oneOrNone(sql, id);
+}
+
+Product.findByProductName = (product_name) => {
+    const sql = `
+    SELECT
+        id,
+        name,
+        description,
+        price,
+        image1,
+        id_category
+    FROM
+        products
+    WHERE
+        name ILIKE $1
+    `;
+    return db.manyOrNone(sql, `%${product_name}%`);
+}
+
 Product.findByCategory = (id_category) => {
     const sql = `
     SELECT

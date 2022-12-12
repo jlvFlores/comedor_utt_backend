@@ -9,6 +9,9 @@ module.exports = (app) => {
 
     // POST ROUTES
     app.post('/api/orders/create', passport.authenticate('jwt', {session: false}), OrdersController.create);
+    
+    // BORRAR DATOS
+    app.post('/api/orders/delete/:id', OrdersController.delete);
 
     // PUT ROUTES
     app.put('/api/orders/updateToDelivered', passport.authenticate('jwt', {session: false}), OrdersController.updateToDelivered);

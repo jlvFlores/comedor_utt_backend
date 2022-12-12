@@ -138,4 +138,14 @@ Order.update = (order) => {
     ]);
 }
 
+Order.delete = (id) => {
+    const sql = `
+    DELETE FROM 
+        orders
+    WHERE 
+        id = $1
+    `;
+    return db.oneOrNone(sql, id);
+}
+
 module.exports = Order;

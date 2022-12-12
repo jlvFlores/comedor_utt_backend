@@ -28,7 +28,7 @@ const products = require('./routes/productsRoutes');
 const orders = require('./routes/ordersRoutes');
 
 // CONFIGURACIONES DEL SERVIDOR
-const ip = '172.31.202.84';
+const ip = '192.168.1.211';
 const port = process.env.PORT || 3000;
 
 

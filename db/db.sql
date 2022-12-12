@@ -10,12 +10,14 @@ CREATE TABLE roles(
 
 INSERT INTO roles (
 	name,
+	image,
 	route,
 	created_at,
 	updated_at
 )
 VALUES(
 	'CLIENTE',
+	'https://firebasestorage.googleapis.com/v0/b/comedor-utt.appspot.com/o/client.png?alt=media&token=b3389a4b-8cf0-4c0f-a410-61bb68afdeaa',
 	'client/products/list',
 	'2022-11-01',
 	'2022-11-01'
@@ -24,12 +26,14 @@ VALUES(
 
 INSERT INTO roles (
 	name,
+	image,
 	route,
 	created_at,
 	updated_at
 )
 VALUES(
 	'COMEDOR',
+	'https://firebasestorage.googleapis.com/v0/b/comedor-utt.appspot.com/o/admin.png?alt=media&token=2de3f8d0-8c62-4629-b2e3-020dcbfdd9de',
 	'diner/orders/list',
 	'2022-11-01',
 	'2022-11-01'
@@ -42,11 +46,33 @@ CREATE TABLE users(
 	name VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
 	notification_token VARCHAR(255) NULL,
-	is_available BOOLEAN NULL,
 	session_token VARCHAR(255) NULL,
 	created_at TIMESTAMP(0) NOT NULL,
 	updated_at TIMESTAMP(0) NOT NULL
 );
+
+INSERT INTO users (
+	id,
+	user_code,
+	name,
+	password,
+	notification_token,
+	session_token,
+	created_at,
+	updated_at
+)
+VALUES(
+	'1',
+	'20192ITID042',
+	'Jose Luis Vazquez Flores',
+	'e10adc3949ba59abbe56e057f20f883e',
+	'',
+	'',
+	'2022-12-07 7:14:29',
+	'2022-12-07 7:14:29'
+);
+-- Change user_code and name to that of the main administer
+-- 123456 encrypted is e10adc3949ba59abbe56e057f20f883e
 
 DROP TABLE IF EXISTS user_has_roles CASCADE;
 CREATE TABLE user_has_roles(
@@ -57,6 +83,32 @@ CREATE TABLE user_has_roles(
 	FOREIGN KEY(id_user) REFERENCES users(id) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY(id_rol) REFERENCES roles(id) ON UPDATE CASCADE ON DELETE CASCADE,
 	PRIMARY KEY(id_user, id_rol)
+);
+
+INSERT INTO user_has_roles (
+	id_user,
+	id_rol,
+	created_at,
+	updated_at
+)
+VALUES(
+	1,
+	1,
+	'2022-12-07 7:14:29',
+	'2022-12-07 7:14:29'
+);
+
+INSERT INTO user_has_roles (
+	id_user,
+	id_rol,
+	created_at,
+	updated_at
+)
+VALUES(
+	1,
+	2,
+	'2022-12-07 7:14:29',
+	'2022-12-07 7:14:29'
 );
 
 DROP TABLE IF EXISTS categories CASCADE;

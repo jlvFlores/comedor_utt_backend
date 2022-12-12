@@ -95,6 +95,22 @@ module.exports = {
                 error: error
             });
         }
-    }
+    },
+
+    async delete(req, res, next) {
+        try {
+            const id = req.params.id;
+            const data = await Order.delete(id);    
+            return res.status(201).json(data);
+        } 
+        catch (error) {
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                message: 'Error al borrar el pedido',
+                success: false,
+                error: error
+            });
+        }
+    },
 
 }
